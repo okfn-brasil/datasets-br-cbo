@@ -15,7 +15,8 @@ cd dumps
 wget -c --output-document=CBO2002_Liv1.pdf www.mtecbo.gov.br/cbosite/pages/download?tipoDownload=1
 wget -c http://portalfat.mte.gov.br/wp-content/uploads/2016/02/CBO2002_LISTA.pdf
 pdftotext -layout CBO2002_LISTA.pdf
-echo -e "codigo,termo,tipo" | cat CBO2002_LISTA.txt | grep -E "^[0-9]{2,}" | tr -s ',' ';' | sed  -r 's:     +:,:g' > ../data/lista.txt
+echo -e "codigo,termo,tipo" | cat CBO2002_LISTA.txt | grep -E "^[0-9]{2,}" \
+| tr -s ',' ';' | sed  -r 's:     +:,:g' > ../data/lista.csv
 
 ```
 
