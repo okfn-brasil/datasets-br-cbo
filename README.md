@@ -13,25 +13,24 @@ Todos os mataterais-fonte estão sendo mantidos na pasta `dumps`.
 ```sh
 cd dumps
 
-## COPIA: 
+## COPIA:
 wget -c --output-document=CBO2002_Liv1.pdf www.mtecbo.gov.br/cbosite/pages/download?tipoDownload=1
 wget -c http://portalfat.mte.gov.br/wp-content/uploads/2016/02/CBO2002_LISTA.pdf
 
-## CONVERSAO:
+## CONVERSAO PRINCIPAL:
 pdftotext -layout CBO2002_LISTA.pdf
 cat CBO2002_LISTA.txt | grep -E "^[0-9]{4,}" | tr -s ',' ';' > tmp.txt
 echo -e "codigo,termo,tipo" | cat - tmp.txt | sed  -r 's:     +:,:g' > ../data/lista.csv
-rm tmp.txt # opcional, usar diff  para para conferir se não corrompeu no processo 
+rm tmp.txt # opcional, usar diff  para para conferir se não corrompeu no processo
+
+## LISTA DERIVADA, sem sinônimos (só termos canônicos)
+awk -F ","  '$3 ~/[Oo]cupa[ç][aã]o/ { print $1 "," $2 }' data/lista.csv > data/lista_canonicos.csv
 ```
 
 O primeiro `wget` é apenas para a preservação do inteiro teor das definições CBO, que são fornecidas em PDF e portanto difíceis de serem extraídas na forma de lista. O nome de arquivo é o oficial, obtido via navegador.
 
-Com o segundo `wget` se obtém uma listagem oficial (mte.gov.br) da lista desejada  &ndash; resta auditorar com outros recursos, como a lista de códigos apresentados no inteiro teor. 
+Com o segundo `wget` se obtém uma listagem oficial (mte.gov.br) da lista desejada  &ndash; resta auditorar com outros recursos, como a lista de códigos apresentados no inteiro teor.
 
 A opção `-layout` foi adotada por se mostrar mais adequada que a _default_ (`-raw`), recuperando linha a linha já num formato próximo ao de planilha. O `grep` garante a exclusão de cabeçalhos e rodapés, o `tr` evita eventuais ambiguidades com o separador CSV, e o comando `sed` faz o trabalho principal de conversão de formato, garantindo por fim uma lista estruturada.
 
-NOTA: com o comando `cat tmp.txt | grep ";"` pode-se conferir os casos onde houve alguma adulteração, e com `diff tmp.txt CBO2002_LISTA.txt` pode-se conferir se as demais hipóteses de trabalho foram adequadas. 
-
-
-
-
+NOTA: com o comando `cat tmp.txt | grep ";"` pode-se conferir os casos onde houve alguma adulteração, e com `diff tmp.txt CBO2002_LISTA.txt` pode-se conferir se as demais hipóteses de trabalho foram adequadas.
