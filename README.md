@@ -24,10 +24,11 @@ echo -e "codigo,termo,tipo" | cat - tmp.txt | sed  -r 's:     +:,:g' > ../data/l
 rm tmp.txt # opcional, usar diff  para para conferir se não corrompeu no processo 
 ```
 
-O primeiro `wget` é apenas para a preservação do inteiro teor das definições CBO, que são fornecidas apenas em PDF e portanto difíceis de serem extraídas na forma de lista. O nome de arquivo é o mesmo que o originalmente obtido por link via navegador. 
+O primeiro `wget` é apenas para a preservação do inteiro teor das definições CBO, que são fornecidas em PDF e portanto difíceis de serem extraídas na forma de lista. O nome de arquivo é o oficial, obtido via navegador.
 
-O segundo `wget` obtém uma listagem oficial (mte.gov.br) da lista desejada, de onde supomos haver o conteúdo desejado &ndash; resta auditorar com outrosrecursos a lista de códigos apresentados no inteiro teor. 
-A opção `-layout` foi testada depois da default e  `-raw`  por se mostrar mais adequada, recuperando linha a linha já num formato próximo ao de planilha. O `grep` garante a exclusão de cabeçalhos e rodapés, o `tr` evita eventuis ambiguidades com o separador CSV, e o `seg` faz o trabalho principal de conversão de formato, garantindo por fim uma lista estruturada.
+Com o segundo `wget` se obtém uma listagem oficial (mte.gov.br) da lista desejada  &ndash; resta auditorar com outros recursos, como a lista de códigos apresentados no inteiro teor. 
+
+A opção `-layout` foi adotada por se mostrar mais adequada que a _default_ (`-raw`), recuperando linha a linha já num formato próximo ao de planilha. O `grep` garante a exclusão de cabeçalhos e rodapés, o `tr` evita eventuais ambiguidades com o separador CSV, e o comando `sed` faz o trabalho principal de conversão de formato, garantindo por fim uma lista estruturada.
 
 NOTA: com o comando `cat tmp.txt | grep ";"` pode-se conferir os casos onde houve alguma adulteração, e com `diff tmp.txt CBO2002_LISTA.txt` pode-se conferir se as demais hipóteses de trabalho foram adequadas. 
 
