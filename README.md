@@ -34,3 +34,13 @@ Com o segundo `wget` se obtém uma listagem oficial (mte.gov.br) da lista deseja
 A opção `-layout` foi adotada por se mostrar mais adequada que a _default_ (`-raw`), recuperando linha a linha já num formato próximo ao de planilha. O `grep` garante a exclusão de cabeçalhos e rodapés, o `tr` evita eventuais ambiguidades com o separador CSV, e o comando `sed` faz o trabalho principal de conversão de formato, garantindo por fim uma lista estruturada.
 
 NOTA: com o comando `cat tmp.txt | grep ";"` pode-se conferir os casos onde houve alguma adulteração, e com `diff tmp.txt CBO2002_LISTA.txt` pode-se conferir se as demais hipóteses de trabalho foram adequadas.
+
+## Utilização das listas
+
+Para apenas consultar termos e códigos oficiais canônicos, basta clicar [aqui em `data/lista_canonicos.csv`](https://github.com/okfn-brasil/dataset-cbo/blob/master/data/lista_canonicos.csv) para visualizar todas as ocupações:
+
+* Para _download_: clique em "raw" (pode ser com o botão direito) para baixar a planilha. 
+* Para buscas: ao lado do ícone de lupa (com mensagem "seach this file"), digitar trechos do termo procurado.
+
+Para utilização em bancos de dados e terminologias, usar [`data/lista.csv`](https://github.com/okfn-brasil/dataset-cbo/blob/master/data/lista.csv), que é a lista completa, onde foram mantidos os sinônimos.
+
