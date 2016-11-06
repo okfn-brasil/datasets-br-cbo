@@ -12,12 +12,16 @@ O resultado deste projeto poderá ser oferecido como *dataset* dentro do "ecosis
 Todos os mataterais-fonte estão sendo mantidos na pasta `dumps`.
 ```sh
 cd dumps
+
+## COPIA: 
 wget -c --output-document=CBO2002_Liv1.pdf www.mtecbo.gov.br/cbosite/pages/download?tipoDownload=1
 wget -c http://portalfat.mte.gov.br/wp-content/uploads/2016/02/CBO2002_LISTA.pdf
-pdftotext -layout CBO2002_LISTA.pdf
-echo -e "codigo,termo,tipo" | cat CBO2002_LISTA.txt | grep -E "^[0-9]{2,}" \
-| tr -s ',' ';' | sed  -r 's:     +:,:g' > ../data/lista.csv
 
+## CONVERSAO:
+pdftotext -layout CBO2002_LISTA.pdf
+cat CBO2002_LISTA.txt | grep -E "^[0-9]{4,}" | tr -s ',' ';' > tmp.txt
+echo -e "codigo,termo,tipo" | cat - tmp.txt | sed  -r 's:     +:,:g' > ../data/lista.csv
+rm tmp.txt # opcional, usar diff  para para conferir se não corrompeu no processo 
 ```
 
 O primeiro `wget` é apenas para a preservação do inteiro teor das definições CBO, que são fornecidas apenas em PDF e portanto difíceis de serem extraídas na forma de lista. O nome de arquivo é o mesmo que o originalmente obtido por link via navegador. 
@@ -25,6 +29,7 @@ O primeiro `wget` é apenas para a preservação do inteiro teor das definiçõe
 O segundo `wget` obtém uma listagem oficial (mte.gov.br) da lista desejada, de onde supomos haver o conteúdo desejado &ndash; resta auditorar com outrosrecursos a lista de códigos apresentados no inteiro teor. 
 A opção `-layout` foi testada depois da default e  `-raw`  por se mostrar mais adequada, recuperando linha a linha já num formato próximo ao de planilha. O `grep` garante a exclusão de cabeçalhos e rodapés, o `tr` evita eventuis ambiguidades com o separador CSV, e o `seg` faz o trabalho principal de conversão de formato, garantindo por fim uma lista estruturada.
 
+NOTA: com o comando `cat tmp.txt | grep ";"` pode-se conferir os casos onde houve alguma adulteração, e com `diff tmp.txt CBO2002_LISTA.txt` pode-se conferir se as demais hipóteses de trabalho foram adequadas. 
 
 
 
