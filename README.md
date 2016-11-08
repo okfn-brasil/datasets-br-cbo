@@ -2,7 +2,7 @@
 
 A Classificação Brasileira de Ocupações (**CBO**), instituída pela [portaria ministerial nº. 397 de 2002](http://www.mtecbo.gov.br/cbosite/pages/legislacao.jsf), tem por finalidade a identificação das ocupações no mercado de trabalho, para fins classificatórios junto aos registros administrativos e domiciliares.
 
-Ela se encontra disponível apenas em formato PDF, atualmente (2016) em www.mtecbo.gov.br/cbosite/pages/download?tipoDownload=1
+Ela se encontra disponível apenas em formato PDF, atualmente (2016) em [www.mtecbo.gov.br/cbosite](http://www.mtecbo.gov.br/cbosite/pages/download?tipoDownload=1) (no link "*downloads*").
 
 O objetivo deste projeto é traduzir o PDF para um banco de dados aberto padronizado, que a princípio corresponde a um arquivo simples de planilha [formato CSV](https://pt.wikipedia.org/wiki/Comma-separated_values) com três colunas, relativas a
 
@@ -11,6 +11,15 @@ O objetivo deste projeto é traduzir o PDF para um banco de dados aberto padroni
 * tipo ou status do termo: "sinônimo", "classificação" ou "ocupação"; coluna `tipo`.
 
 O resultado deste projeto poderá ser oferecido como *dataset* dentro do "ecosistema" [Data Packaged Core Datasets](http://data.okfn.org/roadmap/core-datasets) brasileiro. A proposta de *local datasets* foi lançada nesta discussão [_Country-specific data package register_](https://discuss.okfn.org/t/3178), e esta seria uma das primeiras contribuições dentro da proposta.
+
+## Utilização das listas
+
+Para apenas consultar termos e códigos oficiais canônicos, basta clicar [aqui em `data/lista_canonicos.csv`](https://github.com/okfn-brasil/dataset-cbo/blob/master/data/lista_canonicos.csv) para visualizar todas as ocupações:
+
+* Para _download_: clique em "raw" (pode ser com o botão direito) para baixar a planilha. 
+* Para buscas: ao lado do ícone de lupa (com mensagem "seach this file"), digitar trechos do termo procurado.
+
+Para utilização em bancos de dados e terminologias, usar [`data/lista.csv`](https://github.com/okfn-brasil/dataset-cbo/blob/master/data/lista.csv), que é a lista completa, onde foram mantidos os sinônimos.
 
 # Procedimento
 Todos os mataterais-fonte estão sendo mantidos na pasta `dumps`.
@@ -43,12 +52,6 @@ Para a geração da lista canônica, sem sinônimos, foi utilizado um filtro sim
 
 NOTA: com o comando `cat tmp.txt | grep ";"` pode-se conferir os casos onde houve alguma adulteração, e com `diff tmp.txt CBO2002_LISTA.txt` pode-se conferir se as demais hipóteses de trabalho foram adequadas.
 
-## Utilização das listas
+# Licença
 
-Para apenas consultar termos e códigos oficiais canônicos, basta clicar [aqui em `data/lista_canonicos.csv`](https://github.com/okfn-brasil/dataset-cbo/blob/master/data/lista_canonicos.csv) para visualizar todas as ocupações:
-
-* Para _download_: clique em "raw" (pode ser com o botão direito) para baixar a planilha. 
-* Para buscas: ao lado do ícone de lupa (com mensagem "seach this file"), digitar trechos do termo procurado.
-
-Para utilização em bancos de dados e terminologias, usar [`data/lista.csv`](https://github.com/okfn-brasil/dataset-cbo/blob/master/data/lista.csv), que é a lista completa, onde foram mantidos os sinônimos.
-
+[![](https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Cc-public_domain_mark_white.svg/64px-Cc-public_domain_mark_white.svg.png)](https://creativecommons.org/publicdomain/zero/1.0/deed.pt_BR) No Brasil [o *texto de Lei* (incluindo anexos e figuras) e seus complementos, são dados de *domínio público*](https://github.com/ppKrauss/licenses/blob/master/reports/implied-lex-BR-v1.md).  
