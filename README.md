@@ -21,8 +21,8 @@ Para apenas consultar termos e códigos oficiais canônicos, basta clicar [aqui 
 
 Para utilização em bancos de dados e terminologias, usar [`data/lista.csv`](https://github.com/okfn-brasil/dataset-cbo/blob/master/data/lista.csv), que é a lista completa, onde foram mantidos os sinônimos.
 
-# Procedimento
-Todos os mataterais-fonte estão sendo mantidos na pasta `dumps`.
+# Preparação
+Procedimentos utilizados na preparação dos [dados deste projeto](data).  Todos os mataterais-fonte estão sendo mantidos na pasta `dumps`.
 ```sh
 cd dumps
 
